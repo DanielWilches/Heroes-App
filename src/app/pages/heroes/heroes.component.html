@@ -1,0 +1,57 @@
+<main class="animate__animated animate__fadeIn">
+  <h1>listado de héros</h1>
+  <hr />
+  <div class="row">
+    <div class="col text-right">
+      <button routerLink="/heroe/Nuevo" class="btn btn-primary">
+        <fa-icon [icon]="iconS.faPlus"></fa-icon>
+        Agregar
+      </button>
+    </div>
+  </div>
+  <!-- seccion de tabla -->
+  <section class="mt-4">
+    <table  class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Poder</th>
+          <th scope="col">Vivo</th>
+          <th scope="col">tools</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let heroe of heroes; let i = index">
+          <th scope="row">{{ i + 1 }}</th>
+          <td>{{ heroe.nombre }}</td>
+          <td>{{ heroe.poder }}</td>
+          <td>
+            <label *ngIf="heroe.vivo" class="badge badge-success"> vivo</label>
+            <label *ngIf="!heroe.vivo" class="badge badge-danger">
+              muerto
+            </label>
+          </td>
+          <td>
+            <button class="btn btn-outline-info mr-2" type="button" [routerLink]="['/heroe',heroe.id]">
+              <fa-icon [icon]="iconS.faPen"></fa-icon>
+            </button>
+            <button (click)="borrarheroe(heroe, i)" class="btn btn-outline-danger" type="button" >
+              <fa-icon [icon]="iconS.faTrash" ></fa-icon>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+  <div *ngIf="!cargando && heroes.length === 0" class="alert alert-warning text-center mt-3">
+    <h4 class="alert-heading">No hay registros</h4>
+    <fa-icon [icon]="iconS.faExclamation" size="4x"></fa-icon>
+    <p>Realize otra busqueda</p>
+  </div>
+  <div *ngIf="cargando"   class="alert alert-info text-center mt-3">
+    <h4 class="alert-heading">Cargando</h4>
+    <fa-icon [icon]="iconS.faSpinner" size="4x" [spin]="true"></fa-icon>
+    <p>Espere porfavor</p>
+  </div>
+</main>

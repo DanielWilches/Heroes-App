@@ -1,0 +1,128 @@
+<main class="animate__animated animate__fadeIn">
+  <h1>Heroe<small>Nombre del heoree</small></h1>
+  <hr />
+  <section>
+    <div class="col text-right">
+      <button routerLink="heroes" class="btn btn-danger">
+        <fa-icon [icon]="iconS.faArrowLeft"></fa-icon>
+        Regresar
+      </button>
+    </div>
+  </section>
+  <!-- seccion formulario -->
+  <section class="col">
+    <form
+      [formGroup]="heroeForm"
+      #formHeroe="ngForm"
+      (ngSubmit)="setGuardar(formHeroe)"
+    >
+      <div class="form-group">
+        <label>FireBaseID</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="FireBaseID"
+          formControlName="id"
+        />
+        <!-- name="id"
+          [(ngModel)]="heroe.id" -->
+        <small class="form-text text-muted">Este campo es autogenerado</small>
+      </div>
+      <div class="form-group">
+        <label for="">Nombre</label>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="nombre"
+          placeholder="Nombre del héroe"
+        />
+        <!-- caja de Muestra de erroes  -->
+        <div name="errosNombre">
+          <p
+            *ngIf="heroeForm.controls['nombre'].errors?.required"
+            class="text-danger animate__animated animate__fadeInLeft"
+          >
+            este campo es requirido
+          </p>
+          <p
+            *ngIf="heroeForm.controls['nombre'].errors?.maxlength"
+            class="text-danger animate__animated animate__fadeInLeft"
+          >
+            Este campo no puede tener mas de 20 caracteres. intente de nuevo
+          </p>
+          <p
+            *ngIf="heroeForm.controls['nombre'].errors?.minlength"
+            class="text-danger animate__animated animate__fadeInLeft"
+          >
+            Este campo debe superar los tres caracteres. intente de nuevo
+          </p>
+        </div>
+        <!-- name="nombre"
+          [(ngModel)]="heroe.nombre" -->
+      </div>
+      <div class="form-group">
+        <label for="">Poder</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Poder del héroe"
+          formControlName="poder"
+        />
+        <div name="errosPoder">
+          <p
+            *ngIf="heroeForm.controls['poder'].errors?.required"
+            class="text-danger animate__animated animate__fadeInLeft"
+          >
+            este campo es requirido
+          </p>
+          <p
+            *ngIf="heroeForm.controls['poder'].errors?.maxlength"
+            class="text-danger animate__animated animate__fadeInLeft"
+          >
+            Este campo no puede tener mas de 20 caracteres. intente de nuevo
+          </p>
+          <p
+            *ngIf="heroeForm.controls['poder'].errors?.minlength"
+            class="text-danger animate__animated animate__fadeInLeft"
+          >
+            Este campo debe superar los tres caracteres. intente de nuevo
+          </p>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="">Estado</label>
+        <div class="d-flex justify-content-around">
+          <button
+            *ngIf="heroe.vivo"
+            (click)="heroe.vivo = false"
+            class="w-50 m-lg-3 btn btn-outline-success"
+            type="button"
+          >
+            <fa-icon [icon]="iconS.faGrin"></fa-icon>
+            Vivo
+          </button>
+          <button
+            class="w-50 m-lg-3 btn btn-outline-danger"
+            type="button"
+            *ngIf="!heroe.vivo"
+            (click)="heroe.vivo = true"
+          >
+            <fa-icon [icon]="iconS.faDizzy"></fa-icon>
+            Muerto
+          </button>
+        </div>
+      </div>
+      <hr />
+      <div class="d-flex justify-content-center">
+        <button
+          type="submit"
+          class="w-50 btn btn-outline-primary"
+          [disabled]="heroeForm.invalid"
+          >
+          <fa-icon [icon]="iconS.faSave"></fa-icon>
+          Guardar información
+        </button>
+      </div>
+    </form>
+  </section>
+</main>
